@@ -1,0 +1,22 @@
+{% extends 'home/base.html' %}
+{% block content %}
+<h2>Student Dashboard</h2>
+<div class="section">
+<h4>Upcoming Deadlines</h4>
+<ul class="list-block">
+  {% for d in deadlines %}
+    <li><strong>{{ d.title }}</strong> <br> Due: {{ d.due_date|date:'Y-m-d H:i' }}</li>
+  {% empty %}<li>No deadlines yet.</li>{% endfor %}
+</ul>
+</div>
+<div class="section">
+<h4>Your Submissions</h4>
+<ul class="list-block">
+  {% for s in submissions %}
+    <li>File: {{ s.file.name }}<br>Status: {{ s.status }}<br>Submitted: {{ s.submitted_at|date:'Y-m-d H:i' }}</li>
+  {% empty %}<li>No submissions yet.</li>{% endfor %}
+</ul>
+</div>
+<a href="{% url 'upload_submission' %}" class="link-btn">Upload New Submission</a>
+{% endblock %}
+

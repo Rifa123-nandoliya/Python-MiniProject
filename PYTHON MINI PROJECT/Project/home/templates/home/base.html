@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Submission Tracking System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      body {
+        font-family: 'Segoe UI', 'Arial', sans-serif;
+        background: #f2f6fb;
+        margin: 0;
+        padding: 0;
+      }
+      nav {
+        background: #233958;
+        color: #fff;
+        padding: 20px 0 18px 0;
+        text-align: center;
+        font-size: 1.5em;
+        letter-spacing: 2px;
+        font-weight: 600;
+        box-shadow: 0 2px 8px rgba(125,130,140,0.08);
+      }
+      nav .nav-right {
+        position: absolute;
+        right: 32px;
+        top: 27px;
+        font-size: 1rem;
+      }
+      nav a, nav a:visited {
+        color: #bde2ff;
+        text-decoration: none;
+        margin-left: 2em;
+      }
+      nav a:hover {
+        color: #fff;
+        text-decoration: underline;
+      }
+      main.content {
+        max-width: 450px;
+        margin: 40px auto 0 auto;
+        background: #fff;
+        border-radius: 11px;
+        box-shadow: 0 3px 24px rgba(20,55,120,0.08);
+        padding: 40px 38px 33px 38px;
+        min-height: 300px;
+      }
+      h2 {
+        margin-top: 0;
+        color: #233958;
+        font-weight: 700;
+        font-size: 2em;
+        letter-spacing: 0.6px;
+      }
+      label {
+        margin-top: 15px;
+        margin-bottom: 6px;
+        font-weight: bold;
+        letter-spacing: 0.1em;
+        color: #28477a;
+        display: block;
+      }
+      input, select, textarea, button {
+        display:block;
+        width: 100%;
+        margin:4px 0 20px 0;
+        padding: 10px;
+        border: 1px solid #b3bbc7;
+        border-radius: 5px;
+        font-size: 1em;
+      }
+      input:focus, select:focus, textarea:focus {
+        outline:2px solid #72b6ee;
+        border-color: #4687ce;
+      }
+      button {
+        background: #31507c;
+        color: #fff;
+        border: none;
+        transition: background 0.15s;
+        font-size: 1.09em;
+        font-weight: bold;
+        margin-top: 10px;
+        cursor:pointer;
+        border-radius:7px;
+      }
+      button:hover { 
+        background:#3c71c6; 
+      }
+      .error, .helptext {
+        color: #d85863;
+        font-size: 0.98em;
+        margin-top: -16px;
+        margin-bottom: 18px;
+        font-weight: 500;
+      }
+      .section {
+        margin-top: 33px;
+        margin-bottom: 15px;
+      }
+      .list-block {
+        padding-left: 0;
+        margin: 0 0 27px 0;
+      }
+      .list-block li {
+        list-style: none;
+        background: #f6faff;
+        margin-bottom: 10px;
+        border-radius: 6px;
+        padding: 12px 15px;
+        font-size: 1.07em;
+      }
+      .link-btn {
+        color: #1963b1 !important;
+        text-decoration: underline;
+        display:inline-block;
+        margin-top:10px;
+      }
+      /* Progress bar for faculty */
+      .progress-container {
+        background: #e0e8f3;
+        width: 100%;
+        border-radius: 5px;
+        margin-bottom: 14px;
+        border: 1.5px solid #aac6e5;
+        height:22px;
+        position:relative;
+        margin-top: 9px;
+      }
+      .progress-bar {
+        background: linear-gradient(90deg,#3c71c6,#68d9fa); 
+        color:white; 
+        font-weight: bold;
+        padding-left:12px;
+        height:100%;
+        border-radius: 5px;
+        line-height: 22px;
+        font-size: 1em;
+        transition: width 0.4s;
+      }
+      .dashboard-link {
+        font-size: 1.1em;
+        margin: 8px 0;
+        display: inline-block;
+      }
+      @media (max-width: 768px) {
+        main.content { max-width:95vw;padding:13px 8vw;}
+        nav { font-size:1.02em; padding:11px 0;}
+        nav .nav-right {position:static;float:right;}
+      }
+    </style>
+</head>
+<body>
+<nav>
+  Submission Tracking System
+  <span class="nav-right">
+    {% if user.is_authenticated %}
+      <a href="{% url 'logout' %}">Logout</a>
+      {% if user.role == "student" %}<a href="{% url 'dashboard_student' %}">Student Dashboard</a>{% endif %}
+      {% if user.role == "faculty" %}<a href="{% url 'dashboard_faculty' %}">Faculty Dashboard</a>{% endif %}
+    {% else %}
+      <a href="{% url 'login' %}">Login</a>
+    {% endif %}
+  </span>
+</nav>
+<main class="content">
+    {% block content %}
+    {% endblock %}
+</main>
+</body>
+</html>

@@ -1,0 +1,13 @@
+{% extends 'home/base.html' %}
+{% block content %}
+<h2>Upload Submission</h2>
+<form method="post" enctype="multipart/form-data">{% csrf_token %}
+  {% for field in form %}
+    <label>{{ field.label }}</label>
+    {{ field }}
+    {% if field.errors %}<div class="error">{{ field.errors|striptags }}</div>{% endif %}
+    {% if field.help_text %}<div class="helptext">{{ field.help_text }}</div>{% endif %}
+  {% endfor %}
+  <button type="submit">Upload</button>
+</form>
+{% endblock %}

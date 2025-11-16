@@ -1,0 +1,27 @@
+{% extends 'home/base.html' %}
+{% block content %}
+<h2>Faculty Dashboard</h2>
+<div class="section">
+<h4>Team Progress</h4>
+{% for stat in progress %}
+  <b>{{ stat.team.name }}</b>
+  <div class="progress-container">
+    <div class="progress-bar" style="width: {{ stat.pct }}%;">{{ stat.pct }}%</div>
+  </div>
+{% endfor %}
+</div>
+<div class="section">
+<h4>All Submissions</h4>
+<ul class="list-block">
+  {% for s in submissions %}
+    <li>
+      <span>Team: <b>{{ s.team.name }}</b> | Deadline: {{ s.deadline.title }}<br>
+      Uploaded by: {{ s.uploaded_by.username }}</span>
+      <br>
+      <a href="{% url 'feedback_view' s.id %}" class="link-btn">Feedback</a>
+    </li>
+  {% empty %}<li>No submissions yet.</li>{% endfor %}
+</ul>
+</div>
+{% endblock %}
+
